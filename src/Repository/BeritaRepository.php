@@ -47,4 +47,13 @@ class BeritaRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findBeritaAll(){
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.soft_delete = :f')
+            ->orderBy('b.id', 'DESC')
+            ->getQuery();
+            
+        return $qb->execute();
+    }
 }
