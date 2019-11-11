@@ -48,12 +48,12 @@ class PengirimRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPengirimAll()
-    {
-        $qb = $this->createQueryBuilder('b')
-            ->orderBy('b.id', 'DESC')
-            ->getQuery();
+    // public function findPengirimAll()
+    // {
+    //     $qb = $this->createQueryBuilder('b')
+    //         ->orderBy('b.id', 'DESC')
+    //         ->getQuery();
 
-        return $qb->execute();
-    }
+    //     return $qb->execute();
+    // }
 }

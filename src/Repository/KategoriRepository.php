@@ -47,5 +47,13 @@ class KategoriRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAllKategori()
+    {
+        $qb = $this->createQueryBuilder('k')
+            // ->andWhere('b.soft_delete = :f')
+            ->orderBy('k.nama', 'ASC')
+            ->getQuery();
 
+        return $qb->execute();
+    }
 }

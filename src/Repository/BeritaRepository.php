@@ -48,12 +48,42 @@ class BeritaRepository extends ServiceEntityRepository
     }
     */
 
-    public function findBeritaAll(){
-        $qb = $this->createQueryBuilder('b')
-            ->andWhere('b.soft_delete = :f')
-            ->orderBy('b.id', 'DESC')
-            ->getQuery();
-            
-        return $qb->execute();
+    public function findAllBerita(){
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.soft_delete = :val')
+            ->setParameter('val', 'false')
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findOneBySlug($slug){
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.slug = :val')
+            ->setParameter('val', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findBySlug($slug){
+        return $this->createQueryBuilder('b')
+            ->select('b.slug')
+            ->andWhere('b.slug LIKE :val')
+            ->setParameter('val', $slug.'%')
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByKategori($kate_id, $berita_id)
+    {
+        return $this->createQueryBuilder('b')
+            ->select('b')
+            ->andWhere('b.kategori = :val')
+            ->andWhere("b.id != ".$berita_id)
+            ->setParameter('val', $kate_id)
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 }

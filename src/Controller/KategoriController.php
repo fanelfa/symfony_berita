@@ -54,15 +54,15 @@ class KategoriController extends AbstractController
      */
     public function showAll(){
         $entityManager = $this->getDoctrine()->getManager();
-        // $kategori = $entityManager->getRepository(Kategori::class)->findAll();
+        $kategori = $entityManager->getRepository(Kategori::class)->findAllKategori();
 
-        $qb = $entityManager->createQueryBuilder()
-            ->select('k')
-            ->from('App\Entity\Kategori', 'k')
-            ->orderBy('k.id', 'DESC')
-            ->getQuery();
+        // $qb = $entityManager->createQueryBuilder('k')
+        //     ->select('k')
+        //     ->from('App\Entity\Kategori', 'k')
+        //     ->orderBy('k.nama', 'ASC')
+        //     ->getQuery();
 
-        $kategori =  $qb->execute();
+        // $kategori =  $qb->execute();
 
         $data = array();
         $get = 'getId';
